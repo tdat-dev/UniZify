@@ -47,7 +47,19 @@ export function CategoryTiles({ categories }: { categories: any[] }) {
                 href={`/category/${cat.slug || cat.id}`}
                 className="flex h-full flex-col items-center justify-center gap-2 bg-surface-card px-2 py-4 text-center transition-colors hover:bg-surface-sunken focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand/50"
               >
-                <span className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-brand-tint">
+                {/* Ảnh danh mục trộn kiểu: cái là hình cắt nền trong suốt, cái
+                    là ảnh chụp nền trắng/xám. Đĩa nền màu (bg-brand-tint) đâm
+                    vào nền vuông của ảnh chụp → lộ "phông" xấu. Đổi sang đĩa
+                    TRẮNG + hairline: cutout hiện product sạch trên trắng, ảnh
+                    nền trắng hoà liền, nền xám nhạt cũng dịu. Chỉ ô chữ-cái
+                    (danh mục chưa có ảnh) mới giữ nền tint cho khỏi rỗng. */}
+                <span
+                  className={
+                    cat.image
+                      ? 'flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-ink/10'
+                      : 'flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-brand-tint'
+                  }
+                >
                   {cat.image ? (
                     <img
                       src={cat.image}
